@@ -93,22 +93,60 @@ const data = [
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
-
     {three separate paragraph elements}
-
     <span class='expandButton'></span>
   </div>
-
   Hint: You will need to use createElement more than once here!
-
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
-
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
-
   Step 3: return the entire component.
-
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
-
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
-
 */
+function article(data) {
+  const div = document.createElement(`div`)
+  div.classList.add(`article`)
+
+  const title = document.createElement(`h2`)
+  title.classList.add(`title`)
+  title.textContent = data.title
+
+  const date = document.createElement(`date`)
+  date.classList.add(`date`)
+  date.textContent = data.date
+
+  const p1 = document.createElement(`p`)
+  p1.classList.add(`firstParagraph`)
+  p1.textContent = data.firstParagraph
+
+  const p2 = document.createElement(`p`)
+  p2.classList.add(`secondParagraph`)
+  p2.textContent = data.secondParagraph
+
+  const p3 = document.createElement(`p`)
+  p3.classList.add(`thirdParagraph`)
+  p3.textContent = data.thirdParagraph
+
+  const button = document.createElement(`span`)
+  button.classList.add(`expandButton`)
+  button.textContent = `↕↕`
+
+  div.appendChild(title)
+  div.appendChild(date)
+  div.appendChild(p1)
+  div.appendChild(p2)
+  div.appendChild(p3)
+  div.appendChild(button)
+
+  div.addEventListener(click, () => {
+    div.classList.toggle(`article-open`)
+  })
+
+  return div
+  
+}
+
+const articles = document.querySelector('.articles');
+data.forEach(data => {
+  articles.appendChild(article(data))
+})
